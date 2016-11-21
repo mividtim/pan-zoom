@@ -64,7 +64,8 @@ function panzoom (target, cb) {
 	pinch.on('start', function(curr) {
 		impetus && impetus.pause();
 
-		let [f1, f2] = pinch.fingers;
+    let f1 = pinch.fingers[0];
+    let f2 = pinch.fingers[1];
 
 		initialCoords = [f2.position[0]*.5 + f1.position[0]*.5, f2.position[1]*.5 + f1.position[1]*.5];
 	});
