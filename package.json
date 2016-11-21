@@ -1,5 +1,5 @@
 {
-  "name": "pan-zoom",
+  "name": "pan-zoom-es5",
   "version": "2.0.0",
   "description": "Pan and zoom events for any element",
   "main": "index.js",

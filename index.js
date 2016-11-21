@@ -29,7 +29,7 @@ function panzoom (target, cb) {
 	let lastY = 0, lastX = 0;
 	impetus = new Impetus({
 		source: target,
-		update: (x, y) => {
+		update: function(x, y) {
 			let e = {
 				type: 'mouse',
 				dx: x-lastX, dy: y-lastY, dz: 0,
@@ -47,7 +47,7 @@ function panzoom (target, cb) {
 
 
 	//enable zooming
-	wheel(target, (dx, dy, dz, e) => {
+	wheel(target, function(dx, dy, dz, e) {
 		e.preventDefault();
 		cb({
 			type: 'mouse',
@@ -61,19 +61,19 @@ function panzoom (target, cb) {
 	let mult = 2;
 	let initialCoords;
 
-	pinch.on('start', (curr) => {
+	pinch.on('start', function(curr) {
 		impetus && impetus.pause();
 
 		let [f1, f2] = pinch.fingers;
 
 		initialCoords = [f2.position[0]*.5 + f1.position[0]*.5, f2.position[1]*.5 + f1.position[1]*.5];
 	});
-	pinch.on('end', () => {
+	pinch.on('end', function() {
 		initialCoords = null;
 
 		impetus && impetus.resume();
 	});
-	pinch.on('change', (curr, prev) => {
+	pinch.on('change', function(curr, prev) {
 		if (!pinch.pinching || !initialCoords) return;
 
 		cb({
