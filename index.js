@@ -6,10 +6,10 @@
 'use strict';
 
 
-const Impetus = require('impetus');
-const wheel = require('mouse-wheel');
-const touchPinch = require('touch-pinch');
-const position = require('touch-position');
+var Impetus = require('impetus');
+var wheel = require('mouse-wheel');
+var touchPinch = require('touch-pinch');
+var position = require('touch-position');
 
 
 module.exports = panzoom;
@@ -20,17 +20,17 @@ function panzoom (target, cb) {
 
 
 	//enable panning
-	let pos = position({
+	var pos = position({
 		element: target
 	});
 
-	let impetus;
+	var impetus;
 
-	let lastY = 0, lastX = 0;
+	var lastY = 0, lastX = 0;
 	impetus = new Impetus({
 		source: target,
 		update: function(x, y) {
-			let e = {
+			var e = {
 				type: 'mouse',
 				dx: x-lastX, dy: y-lastY, dz: 0,
 				x: pos[0], y: pos[1]
@@ -57,15 +57,15 @@ function panzoom (target, cb) {
 	});
 
 	//mobile pinch zoom
-	let pinch = touchPinch(target);
-	let mult = 2;
-	let initialCoords;
+	var pinch = touchPinch(target);
+	var mult = 2;
+	var initialCoords;
 
 	pinch.on('start', function(curr) {
 		impetus && impetus.pause();
 
-    let f1 = pinch.fingers[0];
-    let f2 = pinch.fingers[1];
+    var f1 = pinch.fingers[0];
+    var f2 = pinch.fingers[1];
 
 		initialCoords = [f2.position[0]*.5 + f1.position[0]*.5, f2.position[1]*.5 + f1.position[1]*.5];
 	});
